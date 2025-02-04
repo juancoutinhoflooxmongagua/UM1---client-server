@@ -29,21 +29,14 @@
     git clone https://github.com/juancoutinhoflooxmongagua/UM1---client-server.git
     ```
 
-2. **Instale as dependências do Backend**
+2. **Instale as dependências**
 
-    Acesse a pasta do backend e instale as dependências:
+    instale as dependências:
 
     ```bash
-    cd UM1---client-server/backend
+    cd UM1---client-server
     npm install
     ```
 
-3. **Instale as dependências do Frontend**
 
-    Acesse a pasta do frontend e instale as dependências:
-
-    ```bash
-    cd UM1---client-server/frontend
-    npm install
-    ```
 
