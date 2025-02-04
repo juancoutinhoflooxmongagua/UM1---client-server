@@ -14,7 +14,7 @@ class UserController {
 
     onEdit(){
 
-        document.querySelector("#box-user-update .btn-cancel").addEventListener("click", e=>{
+        document.querySelector("#box-user-update .btn-cancel").addEventListener("click", e =>{ 
 
             this.showPanelCreate();
 
@@ -51,17 +51,19 @@ class UserController {
 
                     user.loadFromJSON(result);
 
-                    user.save();
+                    user.save().then(user => {
 
-                    this.getTr(user, tr);
+                        this.getTr(user, tr);
 
-                    this.updateCount();
+                        this.updateCount();
 
-                    this.formUpdateEl.reset();
+                        this.formUpdateEl.reset();
 
-                    btn.disabled = false;
+                        btn.disabled = false;
 
-                    this.showPanelCreate();
+                        this.showPanelCreate();
+
+                    });
 
                 },
                 (e) => {
@@ -92,13 +94,15 @@ class UserController {
                     
                     values.photo = content;
 
-                    values.save();
+                    values.save().then(user => {
 
-                    this.addLine(values);
+                        this.addLine(user);
 
-                    this.formEl.reset();
+                        this.formEl.reset();
 
-                    btn.disabled = false;
+                        btn.disabled = false;
+
+                    });
 
                 }, 
                 (e) => {
@@ -199,15 +203,17 @@ class UserController {
 
     selectAll(){
 
-        let users = User.getUsersStorage();
+        User.getUsersStorage().then(data => {
 
-        users.forEach(dataUser=>{
+            data.users.forEach(dataUser => {
 
-            let user = new User();
-
-            user.loadFromJSON(dataUser);
-
-            this.addLine(user);
+                let user = new User();
+    
+                user.loadFromJSON(dataUser);
+    
+                this.addLine(user);
+    
+            });
 
         });
 
@@ -257,11 +263,13 @@ class UserController {
 
                 user.loadFromJSON(JSON.parse(tr.dataset.user));
 
-                user.remove();
+                user.remove().then(data => {
 
-                tr.remove();
+                    tr.remove();
 
-                this.updateCount();
+                    this.updateCount();
+
+                });
 
             }
 
